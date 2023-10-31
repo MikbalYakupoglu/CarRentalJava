@@ -1,11 +1,10 @@
 package com.example.carrentaljava.webApi;
 
 import com.example.carrentaljava.business.abstracts.BrandService;
-import com.example.carrentaljava.entities.concretes.Brand;
+import com.example.carrentaljava.business.requests.CreateBrandRequest;
+import com.example.carrentaljava.business.responses.GetAllBrandsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +18,13 @@ public class BrandsController {
         this.brandService = brandService;
     }
 
-    @GetMapping("")
-    public List<Brand> getAll(){
+    @GetMapping("getall")
+    public List<GetAllBrandsResponse> getAll() {
         return brandService.getAll();
+    }
+
+    @PostMapping("create")
+    public void create(@RequestBody  CreateBrandRequest createBrandRequest) {
+        brandService.create(createBrandRequest);
     }
 }
